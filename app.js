@@ -260,22 +260,22 @@ function initGame() {
 
     //Handle up arrow
 	eventEmitter.on(Messages.KEY_EVENT_UP, () => {
-		hero.y -= 15;
+		hero.y -= 5;
 	});
 
     //Handle down arrow
 	eventEmitter.on(Messages.KEY_EVENT_DOWN, () => {
-		hero.y += 15;
+		hero.y += 5;
 	});
 
     //Handle left arrow
 	eventEmitter.on(Messages.KEY_EVENT_LEFT, () => {
-		hero.x -= 15;
+		hero.x -= 5;
 	});
 
     //Handle right arrow
 	eventEmitter.on(Messages.KEY_EVENT_RIGHT, () => {
-		hero.x += 15;
+		hero.x += 5;
 	});
 
     //Handle Spacebar
@@ -291,7 +291,7 @@ function initGame() {
         hero.incrementPoints();
 
         if(isEnemiesDead()){
-            eventEmitter.emit()
+            eventEmitter.emit(Messages.GAME_END_WIN)
         }
     });
 
@@ -317,9 +317,9 @@ function initGame() {
 }
 
 function drawLife() {
-    const START_POS = canvas.width - 180;
+	const START_POS = canvas.width - 300;
     for(let i=0;i < hero.life; i++){
-        ctx.drawImage(lifeImg, START_POS + 45 * (i+1), canvas.height - 37);
+		ctx.drawImage(lifeImg, START_POS + 50 * (i+1), canvas.height - 50);
     }
 }
 
@@ -357,10 +357,11 @@ function endGame(win) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = 'black';
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
-		if (win) {
-			displayMessage('Victory!!! Pew Pew... - Press [Enter] to start a new game Captain Pew Pew', 'green');
+		if (win == true) {
+			initGame();
+			displayMessage('Victory!!! - Press [Enter] to start a new game Captain', 'green');
 		} else {
-			displayMessage('You died !!! Press [Enter] to start a new game Captain Pew Pew');
+			displayMessage('You died!!! Press [Enter] to start a new game Captain');
 		}
     }, 200);
 }
