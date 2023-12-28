@@ -1,1 +1,1 @@
-# Space Game Using JavaScript
+# __Space Game Using JavaScript__
